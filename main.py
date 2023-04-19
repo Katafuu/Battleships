@@ -32,10 +32,10 @@ if ch == ('1' or 'play'):
         os.system('cls')
         print('')
         try:
-            if sel in visited:
-                raise Exception("Incorrect or already visited co-ordinates, please try again")
-            elif sel == 0:
+            if sel == 0:
                 quit()
+            elif sel in visited:
+                raise Exception("Incorrect or already visited co-ordinates, please try again")
             elif checkHit(sel):
                 print("HIT!")
                 shipnum -= 1
