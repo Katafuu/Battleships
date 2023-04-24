@@ -64,6 +64,7 @@ def printboard(board):
     print('')
     # seperator()
     for counter,val in enumerate(board):
+        #extraSpacing = " "*len(letters[counter])
         print(num[counter], end=" ")
         print(*val, sep=" | ")
         # seperator()

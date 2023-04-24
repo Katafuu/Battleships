@@ -3,8 +3,15 @@ import os
 
 
 def checkHit(coord):
-    col = ord(coord[0])-65
-    row = int(coord[1])-1
+    lett = ''
+    col = 0
+    for x in coord:
+        if ord(x) >= 65:  # if is letter:
+            lett += x
+    row = int(coord.translate({ord(x): None for x in lett})) - 1
+    for let in lett:
+        col += ord(let) - 65
+    col += (len(lett) - 1) * 26
     if realBoard[row][col] == "S":
         fakeBoard[row][col] = "H"
         return True
@@ -18,8 +25,9 @@ def checkHit(coord):
 print("-----Main Menu-----")
 ch = input("1) Play\n2) Quit\n")
 if ch == ('1' or 'play'):
-    dimensions = input('Select the dimensions of the board format: (RowsxColumns): ')
+    dimensions = input('Select the dimensions of the board format: (ColumnsxRows): ')
     rows,col = dimensions.split('x')
+    rows,col = int(rows),int(col)
     shipnum = int(input("Select the number of ships you would like to have: "))
     os.system('cls')
     print('')
@@ -32,7 +40,7 @@ if ch == ('1' or 'play'):
         os.system('cls')
         print('')
         try:
-            if sel == 0:
+            if sel == '0':
                 quit()
             elif sel in visited:
                 raise Exception("Incorrect or already visited co-ordinates, please try again")
